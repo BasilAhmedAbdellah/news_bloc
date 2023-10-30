@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:news_bloc/di/di.dart';
 import 'package:news_bloc/ui/home/HomeScreen.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 

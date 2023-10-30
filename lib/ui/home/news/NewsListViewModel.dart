@@ -1,20 +1,26 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_bloc/api/ApiManager.dart';
-import 'package:news_bloc/model/newsResponse/news.dart';
+import 'package:injectable/injectable.dart';
+import 'package:news_bloc/data/model/newsResponse/news.dart';
+import 'package:news_bloc/repositoryContract/NewsRepositoryContract.dart';
 
+@injectable
 class NewsListViewModel extends Cubit<NewsListState>{
-  NewsListViewModel():super(LoadingState('Loading ...'));
+  late NewsRepository newsRepository;
+
+  @factoryMethod
+  NewsListViewModel(this.newsRepository):super(LoadingState('Loading ...'));
 
  void  loadNews(String? sourceId)async{
     emit(LoadingState('Loading ...'));
     try{
-      var response = await ApiManager.getNews(sourceId);
-      if(response.status=='error'){
-        emit(ErrorState(response.message??""));
-      }
-      else{
-        emit(SuccessState(response.articles));
-      }
+      var newsList = await newsRepository.getNews(sourceId);
+      emit(SuccessState(newsList));
+      // if(response.status=='error'){
+      //   emit(ErrorState(response.message??""));
+      // }
+      // else{
+      //   emit(SuccessState(response.articles));
+      // }
     }catch(e){
       emit(ErrorState(e.toString()));
     }

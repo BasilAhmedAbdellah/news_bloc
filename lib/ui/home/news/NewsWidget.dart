@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:news_bloc/model/newsResponse/news.dart';
+import 'package:news_bloc/data/model/newsResponse/news.dart';
 
 class NewsWidget extends StatelessWidget {
  News news;

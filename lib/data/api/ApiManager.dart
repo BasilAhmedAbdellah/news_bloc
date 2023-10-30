@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:news_bloc/model/newsResponse/NewsResponse.dart';
-import 'package:news_bloc/model/sourcesResponse/SourcesResponse.dart';
+import 'package:injectable/injectable.dart';
+import 'package:news_bloc/data/model/newsResponse/NewsResponse.dart';
+import 'package:news_bloc/data/model/sourcesResponse/SourcesResponse.dart';
+@singleton
 class ApiManager{
   static const baseUrl = 'newsapi.org';
   static const apiKey = 'f4f949f1fef6467ca03b05af4d492650';
 
-  static Future<SourcesResponse> getSources(String categoryId)async{
+ Future<SourcesResponse> getSources(String categoryId)async{
     //apiKey=API_KEY
     var uri = Uri.https(baseUrl,'v2/top-headlines/sources',
         {"apiKey":apiKey,
@@ -19,7 +21,7 @@ class ApiManager{
 //    response.body-> json -> objects
 
   }
-  static Future<NewsResponse> getNews(String? sourceId)async{
+ Future<NewsResponse> getNews(String? sourceId)async{
     var url = Uri.https(baseUrl,"v2/everything",{
       "apiKey":apiKey,
       "sources":sourceId

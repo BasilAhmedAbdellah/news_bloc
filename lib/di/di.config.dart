@@ -20,6 +20,8 @@ import '../data/repositoryImpl/NewsRepositoryImpl.dart' as _i7;
 import '../data/repositoryImpl/NewsSourceRepositoryImpl.dart' as _i11;
 import '../repositoryContract/NewsRepositoryContract.dart' as _i6;
 import '../repositoryContract/NewsSourceRepository.dart' as _i10;
+import '../ui/home/categoryDetails/CategoryDetailsViewModel.dart' as _i12;
+import '../ui/home/news/NewsListViewModel.dart' as _i13;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -41,6 +43,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i9.NewsSourceDataSourceImpl(gh<_i3.ApiManager>()));
     gh.factory<_i10.NewsSourceRepository>(
         () => _i11.NewsSourceRepositoryImpl(gh<_i8.NewsSourceDataSource>()));
+    gh.factory<_i12.CategoryDetailsViewModel>(
+        () => _i12.CategoryDetailsViewModel(gh<_i10.NewsSourceRepository>()));
+    gh.factory<_i13.NewsListViewModel>(
+        () => _i13.NewsListViewModel(gh<_i6.NewsRepository>()));
     return this;
   }
 }
